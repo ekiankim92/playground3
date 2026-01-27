@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: playground3-deployment
+  labels:
+    app: playground3
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: playground3
+  template:
+    metadata:
+      labels:
+        app: playground3
+    spec:
+      containers:
+        - name: playground3
+          image: harbor.infra.xaion/zero-trust/x-factor-frontend-zt
+          ports:
+            - containerPort: 3000
+          command: ['node']
+          args: ['server.js']
+          resources:
+            requests:
+              memory: '512Mi'
+              cpu: '500m'
+            limits:
+              memory: '1Gi'
+              cpu: '1'
