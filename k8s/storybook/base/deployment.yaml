@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: storybook-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: storybook
+  template:
+    metadata:
+      labels:
+        app: storybook
+    spec:
+      containers:
+        - name: storybook
+          image: harbor.infra.playground3-storybook
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 6006
+          resources:
+            requests:
+              memory: '128Mi'
+              cpu: '100m'
+            limits:
+              memory: '256Mi'
+              cpu: '200m'
